@@ -11,15 +11,41 @@ namespace Sklep_Internetowy
         private List<Pracownik> pracownicy;
         private List<Klient> klienci;
         private string nazwa;
+        public List<string> Kategorie;
+        public string Nazwa { get { return nazwa; } private set { nazwa = value; } }
 
         public Sklep(string nazwa)
         {
-            this.nazwa = nazwa;
+            this.Nazwa = nazwa;
+            pracownicy = new List<Pracownik>();
+            Kategorie = new List<string>();
+            klienci = new List<Klient>();
         }
 
-        public void DodajPracownika(Pracownik p)
+        public void UzupelnijTowar(Produkt p)
         {
+            foreach(var pracownik in pracownicy)
+            {
+                if(pracownik.Dzial == p.Kategoria)
+                {
+                    pracownik.UzupelnijTowar(p);
+                    return;
+                }
+            }
+        }
+
+        public Pracownik DodajPracownika(string imie, string nazwisko, string dzial)
+        {
+            Pracownik p = new Pracownik(pracownicy.Count + 1, imie, nazwisko, dzial);
             pracownicy.Add(p);
+            return p;
+        }
+
+        public Klient DodajKlienta(string imie, string nazwisko)
+        {
+            Klient k = new Klient(klienci.Count + 1, imie, nazwisko);
+            klienci.Add(k);
+            return k;
         }
 
         public string ListaProduktowTxt()
@@ -30,7 +56,7 @@ namespace Sklep_Internetowy
             int i = 0;
             foreach(var produkt in produkty)
             {
-                sb.Append(String.Format($"{++i}. {produkt.Key} - {produkt.Key.Cena} - {produkt.Value}"));
+                sb.Append(String.Format($"{++i}. {produkt.Key.Nazwa} - {produkt.Key.Cena} - {produkt.Value}"));
             }
 
             return sb.ToString();
@@ -46,7 +72,7 @@ namespace Sklep_Internetowy
             {
                 if (produkt.Key.Kategoria == kategoria)
                 {
-                    Console.WriteLine(String.Format($"{++i}. {produkt.Key} - {produkt.Key.Cena} - {produkt.Value}"));
+                    Console.WriteLine(String.Format($"{++i}. {produkt.Key.Nazwa} - {produkt.Key.Cena} - {produkt.Value}"));
                     listaProduktow.Add(produkt.Key);
                 }
             }

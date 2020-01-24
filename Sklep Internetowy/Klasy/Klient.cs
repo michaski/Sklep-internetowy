@@ -68,7 +68,7 @@ namespace Sklep_Internetowy
                     dostawa = SpsobDostawy.OdbiorOsobisty;
                     break;
             }
-            Zamowienie z = new Zamowienie(id, this, koszyk, dostawa);
+            Zamowienie z = koszyk.ZlozZamowienie(dostawa);
             Console.WriteLine(z.Podsumowanie());
         }
 

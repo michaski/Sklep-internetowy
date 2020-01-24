@@ -8,7 +8,7 @@ namespace Sklep_Internetowy
 {
     static class Platnosci
     {
-        private static Dictionary<Zamowienie, bool> listaZamowien;  // false - nie opłacone, true - opłacone
+        private static Dictionary<Zamowienie, bool> listaZamowien = new Dictionary<Zamowienie, bool>();  // false - nie opłacone, true - opłacone
 
         public static void DodajZamowienie(Zamowienie z)
         {

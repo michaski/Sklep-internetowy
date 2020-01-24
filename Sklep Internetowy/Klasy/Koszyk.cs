@@ -59,7 +59,7 @@ namespace Sklep_Internetowy
         {
             Zamowienie z = new Zamowienie(idKoszyka, wlasciciel, this, dostawa);
             Platnosci.DodajZamowienie(z);
-            zamowienie = z;
+            Zamowienie = z;
             return z;
         }
 

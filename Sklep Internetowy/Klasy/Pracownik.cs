@@ -8,24 +8,25 @@ namespace Sklep_Internetowy
 {
     class Pracownik : Osoba
     {
-        private string dzial;
+        public string Dzial;
         public Pracownik(int id, string imie, string nazwisko, string dzial)
         {
             this.id = id;
             this.imie = imie;
             this.nazwisko = nazwisko;
-            this.dzial = dzial;
+            this.Dzial = dzial;
         }
 
         public void DodajNowyProdukt(string nazwa, double cena)
         {
-            Produkt p = new Produkt(nazwa, cena, dzial);
+            Produkt p = new Produkt(nazwa, cena, Dzial);
             Magazyn.DodajProdukt(p, 100);
         }
 
         public void UzupelnijTowar(Produkt p)
         {
             Magazyn.DodajProdukt(p, 100);
+            Console.WriteLine($"Pracownik {id} uzupełnia magazyn produktem {p.Nazwa}");
         }
 
         public override string TextToPrint()
