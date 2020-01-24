@@ -6,73 +6,56 @@ using System.Threading.Tasks;
 
 namespace Sklep_Internetowy
 {
-    class Magazyn
+    static class Magazyn
     {
-        private List< Pair<Produkt, int> > stanMagazynu;
+        private static Dictionary<Produkt, int> stanMagazynu = new Dictionary<Produkt, int>();
 
-        public Magazyn()
+        public static void DodajProdukt(Produkt p, int ile)
         {
-            stanMagazynu = new List< Pair<Produkt, int> >();
+            if (stanMagazynu.ContainsKey(p))
+            {
+                stanMagazynu[p] += ile;
+                return;
+            }
+            else
+            {
+                stanMagazynu.Add(p, ile);
+            }
         }
 
-        public void DodajProdukt(Produkt p, int ile)
+        public static void WydajProdukt(Produkt p, int ile)
         {
+            stanMagazynu[p] -= ile;
+        }
+
+        public static List<Produkt> WszystkieProdukty()
+        {
+            List<Produkt> produkty = new List<Produkt>();
             foreach(var produkt in stanMagazynu)
             {
-                if(produkt.First == p)
-                {
-                    produkt.Second += ile;
-                    return;
-                }
-            }
-
-            stanMagazynu.Add(new Pair<Produkt, int>(p, ile));
-        }
-
-        public void WydajProdukt(Produkt p, int ile)
-        {
-            foreach(var produkt in stanMagazynu)    // szukamy wśród listy produktów tego, który mamy wydać
-            {
-                if(produkt.First == p)
-                {
-                    if(ile <= produkt.Second)    // ilość produktów na stanie jest wystarczająca - po prostu ubywa ilość
-                    {
-                        produkt.Second -= ile;
-                        return;
-                    }
-                    else
-                    {
-                        throw new BrakProduktuNaMagazynieException(p);   // za mało produktów na magazynie, aby zrealizować zamówienie - zgłaszamy wyjątek
-                    }
-                }
-            }
-
-            throw new BrakProduktuNaMagazynieException(p); // brak takiego produktu na magazynie - zgłaszamy wyjątek
-        }
-
-        public List<Produkt> WszystkieProdukty()
-        {
-            List<Produkt> produkty = new List<Produkt>();
-            foreach(var para in stanMagazynu)
-            {
-                produkty.Add(para.First);
+                produkty.Add(produkt.Key);
             }
 
             return produkty;
         }
 
-        public List<Produkt> DostepneProdukty()
+        public static List<Produkt> DostepneProdukty()
         {
             List<Produkt> produkty = new List<Produkt>();
-            foreach (var para in stanMagazynu)
+            foreach (var produkt in stanMagazynu)
             {
-                if (para.Second > 0)
+                if (produkt.Value > 0)
                 {
-                    produkty.Add(para.First);
+                    produkty.Add(produkt.Key);
                 }
             }
 
             return produkty;
+        }
+
+        public static int IleDostepnych(Produkt p)
+        {
+            return stanMagazynu[p];
         }
     }
 }

@@ -8,5 +8,9 @@ namespace Sklep_Internetowy
 {
     class Pracownik : Osoba
     {
+        public override string TextToPrint()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

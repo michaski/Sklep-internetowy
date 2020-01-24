@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Sklep_Internetowy
 {
-    abstract class Osoba : IPrintable
+    interface IPrintable
     {
-        protected string imie, nazwisko;
-        protected int id;
-
-        public abstract string TextToPrint();
+        string TextToPrint();
     }
 }

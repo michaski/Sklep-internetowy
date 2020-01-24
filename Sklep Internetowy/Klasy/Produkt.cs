@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sklep_Internetowy
 {
-    class Produkt
+    class Produkt : IPrintable
     {
         #region Właściwości
         public string Nazwa { get; private set; }
@@ -19,6 +19,11 @@ namespace Sklep_Internetowy
             this.Nazwa = nazwa;
             this.Kategoria = kategoria;
             this.Cena = cena;
+        }
+
+        public string TextToPrint()
+        {
+            return Nazwa + " - " + Cena + "zł";
         }
     }
 }

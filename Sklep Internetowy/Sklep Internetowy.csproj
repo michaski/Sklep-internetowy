@@ -43,25 +43,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfejsy\IPrintable.cs" />
     <Compile Include="Klasy\Klient.cs" />
     <Compile Include="Klasy\Koszyk.cs" />
     <Compile Include="Klasy\Magazyn.cs" />
     <Compile Include="Klasy\Osoba.cs" />
     <Compile Include="Klasy\Pair.cs" />
+    <Compile Include="Klasy\Platnosci.cs" />
     <Compile Include="Klasy\Pracownik.cs" />
     <Compile Include="Klasy\Produkt.cs" />
     <Compile Include="Klasy\Sklep.cs" />
     <Compile Include="Klasy\Zamowienie.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SposobDostawy.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Wyjątki\BrakProduktuNaMagazynieException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfejsy\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

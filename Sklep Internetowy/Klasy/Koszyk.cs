@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +9,46 @@ namespace Sklep_Internetowy
 {
     class Koszyk
     {
-        private List<Produkt> produkty;
+        public Dictionary<Produkt, int> Produkty { get; private set; }
 
         public Koszyk()
         {
-            produkty = new List<Produkt>();
+            Produkty = new Dictionary<Produkt, int>();
         }
 
-        public Koszyk(Produkt p)
+        public Koszyk(Produkt p, int ile=1)
         {
-            produkty = new List<Produkt>();
-            produkty.Add(p);
+            Produkty = new Dictionary<Produkt, int>();
+            DodajProdukt(p, ile);
         }
 
-        public Koszyk(List<Produkt> produkty)
+        public void DodajProdukt(Produkt p, int ile=1)
         {
-            this.produkty = new List<Produkt>();
-            this.produkty.AddRange(produkty);
+            if (Magazyn.IleDostepnych(p) >= ile)
+            {
+                Produkty.Add(p, ile);
+            }
+            else
+            {
+                throw new BrakProduktuNaMagazynieException();
+            }
+        }
+
+        public void UsunProdukt(Produkt p, int ile=0)
+        {
+            if(ile > 0)
+            {
+                Produkty.Remove(p);
+            }
+            else
+            {
+                Produkty[p] -= ile;
+            }
+        }
+
+        public Zamowienie ZlozZamowienie()
+        {
+
         }
     }
 }

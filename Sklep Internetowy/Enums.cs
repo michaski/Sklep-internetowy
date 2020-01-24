@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Sklep_Internetowy
 {
-    enum SposobDostawy { OdbiorOsobisty, Paczkomat, Kurier, KurierZaPobraniem }
+    enum SpsobDostawy { OdbiorOsobisty, Paczkomat, Kurier, KurierZaPobraniem }
 }

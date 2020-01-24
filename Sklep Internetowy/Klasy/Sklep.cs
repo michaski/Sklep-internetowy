@@ -10,6 +10,6 @@ namespace Sklep_Internetowy
     {
         private List<Pracownik> pracownicy;
         private List<Klient> klienci;
-        private Magazyn magazyn;
+        private string nazwa;
     }
 }
