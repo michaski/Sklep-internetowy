@@ -11,10 +11,10 @@ namespace Sklep_Internetowy
         #region Właściwości
         public string Nazwa { get; private set; }
         public string Kategoria { get; private set; }
-        public int Cena { get; private set; }
+        public double Cena { get; private set; }
         #endregion
 
-        public Produkt(string nazwa, int cena, string kategoria = "Inne")
+        public Produkt(string nazwa, double cena, string kategoria = "Inne")
         {
             this.Nazwa = nazwa;
             this.Kategoria = kategoria;

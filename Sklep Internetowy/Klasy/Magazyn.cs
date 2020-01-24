@@ -26,17 +26,15 @@ namespace Sklep_Internetowy
         public static void WydajProdukt(Produkt p, int ile)
         {
             stanMagazynu[p] -= ile;
+            if(stanMagazynu[p] == 0)
+            {
+                throw new BrakProduktuNaMagazynieException();
+            }
         }
 
-        public static List<Produkt> WszystkieProdukty()
+        public static Dictionary<Produkt, int> WszystkieProdukty()
         {
-            List<Produkt> produkty = new List<Produkt>();
-            foreach(var produkt in stanMagazynu)
-            {
-                produkty.Add(produkt.Key);
-            }
-
-            return produkty;
+            return stanMagazynu;
         }
 
         public static List<Produkt> DostepneProdukty()

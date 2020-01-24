@@ -8,6 +8,12 @@ namespace Sklep_Internetowy
 {
     class BrakProduktuNaMagazynieException : Exception
     {
+        Produkt produkt;
         public BrakProduktuNaMagazynieException() : base("Przepraszamy, brak wystarczającej liczby produktów na magazynie")   { }
+
+        public BrakProduktuNaMagazynieException(Produkt p) : base("Przepraszamy, brak wystarczającej liczby produktów na magazynie") 
+        { 
+            produkt = p;
+        }
     }
 }

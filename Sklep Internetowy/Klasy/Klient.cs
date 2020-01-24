@@ -79,7 +79,7 @@ namespace Sklep_Internetowy
 
         public override string TextToPrint()
         {
-            throw new NotImplementedException();
+            return String.Format($"Klient {imie} {nazwisko} (nr klienta {id})");
         }
     }
 }
