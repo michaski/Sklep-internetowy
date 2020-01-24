@@ -77,6 +77,11 @@ namespace Sklep_Internetowy
             Platnosci.ZaplaconoZamowienie(koszyk.Zamowienie);
         }
 
+        public string ZawartoscKoszyka()
+        {
+            return koszyk.TextToPrint();
+        }
+
         public override string TextToPrint()
         {
             return String.Format($"Klient {imie} {nazwisko} (nr klienta {id})");

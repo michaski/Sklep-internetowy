@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Sklep_Internetowy
 {
-    class Koszyk
+    class Koszyk : IPrintable
     {
         private double wartosc;
         private int idKoszyka;
@@ -66,6 +66,19 @@ namespace Sklep_Internetowy
         public double Wartosc()
         {
             return wartosc;
+        }
+
+        public string TextToPrint()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Koszyk:\n");
+            foreach (var produkt in Produkty)
+            {
+                sb.Append(produkt.Key.TextToPrint() + " x" + produkt.Value + "szt. = " + produkt.Key.Cena * produkt.Value + "\n");
+            }
+            sb.Append("Razem " + Wartosc().ToString() + "zł\n");
+
+            return sb.ToString();
         }
     }
 }

@@ -45,6 +45,10 @@ namespace Sklep_Internetowy
                     }
                     klient.Zaplac();
                 }
+                else if (wyborMenu == sklep.Kategorie.Count + 2)
+                {
+                    Console.WriteLine(klient.ZawartoscKoszyka());
+                }
                 else
                 {
                     var zakup = sklep.ProduktZKategorii(sklep.Kategorie[wyborMenu - 1]);
@@ -69,7 +73,7 @@ namespace Sklep_Internetowy
         {
             int wybor = -1;
             Console.WriteLine("Witamy w sklepie internetowym " + sklep.Nazwa);
-            while (wybor < 0 || wybor > sklep.Kategorie.Count+1)
+            while (wybor < 0 || wybor > sklep.Kategorie.Count+2)
             {
                 Console.WriteLine("Wybierz kategorię produktów: ");
                 int i = 0;
@@ -78,6 +82,7 @@ namespace Sklep_Internetowy
                     Console.WriteLine($"{++i}. {kategoria}");
                 }
                 Console.WriteLine($"{++i}. Przejdz do zakupu");
+                Console.WriteLine($"{++i}. Wyświetl koszyk");
                 Console.WriteLine("0. Wyjście");
                 try
                 {
