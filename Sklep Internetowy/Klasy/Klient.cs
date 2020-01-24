@@ -15,7 +15,7 @@ namespace Sklep_Internetowy
             this.id = id;
             this.imie = imie;
             this.nazwisko = nazwisko;
-            koszyk = new Koszyk();
+            koszyk = new Koszyk(this, id);
         }
 
         public void DodajDoKoszyka(Produkt p, int ile)
@@ -26,8 +26,55 @@ namespace Sklep_Internetowy
             }
             catch(BrakProduktuNaMagazynieException e)
             {
-                Console.WriteLine("Przepraszamy, brak wystarczającej ilości towaru na magazynie.");
+                Console.WriteLine(e.Message);
             }
+        }
+
+        public void Kup()
+        {
+            int wybor = 0;
+            SpsobDostawy dostawa;
+            while (wybor < 1 || wybor > 4)
+            {
+                Console.WriteLine("Proszę wybrać sposób dostawy:");
+                Console.WriteLine("1. Odbiór osobisty w magazynie");
+                Console.WriteLine("2. Paczkomat");
+                Console.WriteLine("3. Kurier");
+                Console.WriteLine("4. Kurier za pobraniem");
+                try
+                {
+                    wybor = int.Parse(Console.ReadLine());
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Podano złą liczbę.");
+                }
+            }
+            switch(wybor)
+            {
+                case 1:
+                    dostawa = SpsobDostawy.OdbiorOsobisty;
+                    break;
+                case 2:
+                    dostawa = SpsobDostawy.Paczkomat;
+                    break;
+                case 3:
+                    dostawa = SpsobDostawy.Kurier;
+                    break;
+                case 4:
+                    dostawa = SpsobDostawy.KurierZaPobraniem;
+                    break;
+                default:
+                    dostawa = SpsobDostawy.OdbiorOsobisty;
+                    break;
+            }
+            Zamowienie z = new Zamowienie(id, this, koszyk, dostawa);
+            Console.WriteLine(z.Podsumowanie());
+        }
+
+        public void Zaplac()
+        {
+            Platnosci.ZaplaconoZamowienie(koszyk.Zamowienie);
         }
 
         public override string TextToPrint()

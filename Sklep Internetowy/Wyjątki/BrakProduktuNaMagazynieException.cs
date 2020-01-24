@@ -8,17 +8,6 @@ namespace Sklep_Internetowy
 {
     class BrakProduktuNaMagazynieException : Exception
     {
-        private Produkt produkt;
-        public BrakProduktuNaMagazynieException() : base("Brak wystarczającej liczby produktów na magazynie")   { }
-
-        public BrakProduktuNaMagazynieException(Produkt p) : base("Brak wystarczającej liczby produktów na magazynie")
-        {
-            produkt = p;
-        }
-
-        public string InformacjeOProdukcie()
-        {
-            return produkt.ToString();
-        }
+        public BrakProduktuNaMagazynieException() : base("Przepraszamy, brak wystarczającej liczby produktów na magazynie")   { }
     }
 }

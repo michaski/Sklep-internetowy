@@ -9,17 +9,18 @@ namespace Sklep_Internetowy
 {
     class Koszyk
     {
+        private double wartosc;
+        private int idKoszyka;
+        private Klient wlasciciel;
+        public Zamowienie Zamowienie { get; private set; }
         public Dictionary<Produkt, int> Produkty { get; private set; }
 
-        public Koszyk()
+        public Koszyk(Klient wlasciciel, int id)
         {
+            idKoszyka = id;
+            this.wlasciciel = wlasciciel;
             Produkty = new Dictionary<Produkt, int>();
-        }
-
-        public Koszyk(Produkt p, int ile=1)
-        {
-            Produkty = new Dictionary<Produkt, int>();
-            DodajProdukt(p, ile);
+            wartosc = 0.0;
         }
 
         public void DodajProdukt(Produkt p, int ile=1)
@@ -27,6 +28,7 @@ namespace Sklep_Internetowy
             if (Magazyn.IleDostepnych(p) >= ile)
             {
                 Produkty.Add(p, ile);
+                wartosc += p.Cena * ile;
             }
             else
             {
@@ -38,17 +40,32 @@ namespace Sklep_Internetowy
         {
             if(ile > 0)
             {
+                wartosc -= p.Cena * Produkty[p];
                 Produkty.Remove(p);
             }
             else
             {
                 Produkty[p] -= ile;
+                wartosc -= p.Cena * ile;
             }
         }
 
-        public Zamowienie ZlozZamowienie()
+        public void Oproznij()
         {
+            Produkty.Clear();
+        }
 
+        public Zamowienie ZlozZamowienie(SpsobDostawy dostawa)
+        {
+            Zamowienie z = new Zamowienie(idKoszyka, wlasciciel, this, dostawa);
+            Platnosci.DodajZamowienie(z);
+            zamowienie = z;
+            return z;
+        }
+
+        public double Wartosc()
+        {
+            return wartosc;
         }
     }
 }
